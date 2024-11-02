@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  laravel:
+    build:
+      context: .
+      network: host
+      dockerfile: Dockerfile
+    container_name: laravel_app
+    restart: always
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/var/www/html
+      - ./docker-config/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./docker-config/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./docker-config/php/www.conf:/usr/local/etc/php-fpm.d/www.conf
+      - ./docker-config/php/php-fpm.conf:/usr/local/etc/php-fpm.conf
